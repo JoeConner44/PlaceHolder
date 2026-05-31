@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLACEHOLDER DMS — Dealer Management System</title>
+  <meta name="description" content="PLACEHOLDER — AI-powered dealer management system for independent Georgia auto dealers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     LOGIN SCREEN
+═══════════════════════════════════════════ -->
+<div id="login-screen" class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">PH</div>
+      <div>
+        <div class="login-logo-name">PLACEHOLDER</div>
+        <div class="login-logo-sub">Dealer Management System</div>
+      </div>
+    </div>
+    <h1 class="login-heading">Welcome back</h1>
+    <p class="login-sub">Sign in to your dealership account</p>
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="field-label" for="login-email">Email address</label>
+        <input type="email" id="login-email" value="admin@gaautodealer.com" autocomplete="email" required />
+      </div>
+      <div class="form-group">
+        <label class="field-label" for="login-password">Password</label>
+        <input type="password" id="login-password" value="demo1234" autocomplete="current-password" required />
+      </div>
+      <div class="flex-center justify-between" style="font-size:12px">
+        <label class="flex-center gap-8" style="color:var(--gray-500);cursor:pointer">
+          <input type="checkbox" checked style="width:auto;margin:0" /> Remember me
+        </label>
+        <a href="#" style="color:var(--blue)">Forgot password?</a>
+      </div>
+      <button type="submit" class="login-btn">Sign in to dashboard</button>
+    </form>
+    <p class="login-footer">
+      Don't have an account? <a href="mailto:support@placeholder-dms.com">Contact your admin</a>
+    </p>
+    <p class="login-footer mt-8" style="color:var(--gray-300)">Demo: any email + any password</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     APP SHELL
+═══════════════════════════════════════════ -->
+<div id="app-shell" class="app-shell">
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar" role="navigation" aria-label="Main navigation">
+
+    <div class="sidebar-logo">
+      <div class="logo-lockup">
+        <div class="logo-icon">PH</div>
+        <div>
+          <div class="logo-name">PLACEHOLDER</div>
+          <div class="logo-tagline">DMS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" data-page="inventory" onclick="navigate('inventory')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l4 4v4a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+        <span>Inventory</span>
+      </div>
+      <div class="nav-item" data-page="deals" onclick="navigate('deals')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>Deal desk</span>
+      </div>
+      <div class="nav-item" data-page="crm" onclick="navigate('crm')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>CRM / Leads</span>
+        <span class="nav-badge">7</span>
+      </div>
+
+      <div class="nav-section-label">Finance</div>
+      <div class="nav-item" data-page="fi" onclick="navigate('fi')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <span>F&amp;I</span>
+      </div>
+      <div class="nav-item" data-page="bhph" onclick="navigate('bhph')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+        <span>BHPH collections</span>
+      </div>
+
+      <div class="nav-section-label">Operations</div>
+      <div class="nav-item" data-page="etr" onclick="navigate('etr')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
+        <span>Georgia ETR</span>
+      </div>
+      <div class="nav-item" data-page="reports" onclick="navigate('reports')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Reports</span>
+      </div>
+      <div class="nav-item" data-page="ai" onclick="navigate('ai')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+        <span>AI assistant</span>
+        <span class="nav-badge ai-badge">AI</span>
+      </div>
+
+      <div class="nav-section-label">Account</div>
+      <div class="nav-item" data-page="settings" onclick="navigate('settings')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span>Settings</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-card" onclick="handleLogout()">
+        <div class="user-avatar">JD</div>
+        <div style="flex:1;min-width:0">
+          <div class="user-name">John Dealer</div>
+          <div class="user-role">General Manager</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main area ── -->
+  <div class="main-area">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <h1 class="topbar-title" id="topbar-title">Dashboard</h1>
+      <div class="topbar-spacer"></div>
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search anything...
+      </div>
+      <button class="topbar-btn" aria-label="Notifications">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </button>
+      <button class="topbar-btn primary" onclick="navigate('deals')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        New deal
+      </button>
+    </header>
+
+    <!-- Pages -->
+    <main class="page-content" role="main">
+
+      <!-- ══════════════════════════════════
+           DASHBOARD
+      ══════════════════════════════════ -->
+      <div id="page-dashboard" class="page active">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l4 4v4a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+              Units in stock
+            </div>
+            <div class="metric-value">47</div>
+            <div class="metric-delta up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              +3 this week
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Deals this month
+            </div>
+            <div class="metric-value">23</div>
+            <div class="metric-delta up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              +5 vs last month
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Gross this month
+            </div>
+            <div class="metric-value">$61,400</div>
+            <div class="metric-delta up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              +12% vs last month
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Open leads
+            </div>
+            <div class="metric-value">34</div>
+            <div class="metric-delta down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+              7 need follow-up
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Recent deals <span class="card-subtitle">this month</span></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Customer</th><th>Vehicle</th><th>Type</th><th>Gross</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td class="fw-500">Marcus T.</td><td>2021 F-150</td><td>Finance</td><td class="text-success">$3,200</td><td><span class="badge badge-green">Funded</span></td></tr>
+                  <tr><td class="fw-500">Sarah L.</td><td>2019 Camry</td><td>BHPH</td><td class="text-success">$4,100</td><td><span class="badge badge-green">Funded</span></td></tr>
+                  <tr><td class="fw-500">David R.</td><td>2020 Equinox</td><td>Cash</td><td class="text-success">$2,800</td><td><span class="badge badge-blue">ETR pending</span></td></tr>
+                  <tr><td class="fw-500">Angela M.</td><td>2022 Silverado</td><td>Finance</td><td class="text-success">$5,400</td><td><span class="badge badge-amber">Pending</span></td></tr>
+                  <tr><td class="fw-500">James W.</td><td>2018 Accord</td><td>Cash</td><td class="text-success">$1,900</td><td><span class="badge badge-green">Funded</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Today's activity</div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="activity-body"><div class="activity-text">Deal funded — Marcus T. / 2021 F-150</div><div class="activity-time">9:42 AM</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--blue-pale)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div class="activity-body"><div class="activity-text">New lead — Jennifer K. (website, SUV under $20k)</div><div class="activity-time">10:15 AM</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--amber-light)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg></div>
+                <div class="activity-body"><div class="activity-text">BHPH overdue — Tonya H. is 7 days past due</div><div class="activity-time">11:00 AM</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--blue-pale)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l4 4v4a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+                <div class="activity-body"><div class="activity-text">Unit added — 2022 RAM 1500 (stock GA-2238)</div><div class="activity-time">1:30 PM</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg></div>
+                <div class="activity-body"><div class="activity-text">ETR submitted — David R. / 2020 Equinox, Walton Co.</div><div class="activity-time">2:05 PM</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Inventory age</div>
+            <div class="bhph-stat-row"><span>0–30 days</span><span class="flex-center gap-8"><span class="badge badge-green">18 units</span></span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:38%"></div></div>
+            <div class="bhph-stat-row"><span>31–60 days</span><span><span class="badge badge-amber">14 units</span></span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:30%;background:var(--gold)"></div></div>
+            <div class="bhph-stat-row"><span>61–90 days</span><span><span class="badge badge-red">9 units</span></span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:19%;background:var(--red)"></div></div>
+            <div class="bhph-stat-row"><span>90+ days</span><span><span class="badge badge-gray">6 units</span></span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:13%;background:var(--gray-300)"></div></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Sales by type <span class="card-subtitle">MTD</span></div>
+            <div class="bhph-stat-row"><span>Finance</span><span class="fw-500">11 deals — $34,100</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+            <div class="bhph-stat-row"><span>BHPH</span><span class="fw-500">7 deals — $18,200</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:30%;background:var(--green)"></div></div>
+            <div class="bhph-stat-row"><span>Cash</span><span class="fw-500">5 deals — $9,100</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:15%;background:var(--gold)"></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">AI insight of the day <span class="card-subtitle" style="color:var(--blue)">powered by Claude</span></div>
+          <div style="display:flex;align-items:flex-start;gap:14px;padding:4px 0">
+            <div style="width:36px;height:36px;background:var(--navy);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
+            </div>
+            <div>
+              <p style="font-size:13px;color:var(--gray-700);line-height:1.6">You have 3 units over 60 days old (GA-2232, GA-2235, GA-2236) costing approximately <strong>$580/month</strong> in floor plan interest. A 6% price reduction on all three would likely move them within 10 days and recover $3,200 in gross profit net of the reductions. Also: your Facebook lead response time is averaging 47 minutes — reducing that to under 5 minutes could add 2–3 deals this month.</p>
+              <button class="btn btn-sm mt-8" onclick="aiQuickPrompt('Tell me more about my aged inventory and pricing strategy')">Ask AI for details →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           INVENTORY
+      ══════════════════════════════════ -->
+      <div id="page-inventory" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Inventory</h2>
+          <button class="btn primary" onclick="document.getElementById('add-vehicle-modal').style.display='flex'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add vehicle
+          </button>
+        </div>
+
+        <div class="filter-row">
+          <button class="filter-pill inv-filter-btn active" data-status="all" onclick="filterInventory('all')">All <span id="inv-count">12 vehicles</span></button>
+          <button class="filter-pill inv-filter-btn" data-status="frontline" onclick="filterInventory('frontline')">Frontline</button>
+          <button class="filter-pill inv-filter-btn" data-status="recon" onclick="filterInventory('recon')">In recon</button>
+          <button class="filter-pill inv-filter-btn" data-status="sold" onclick="filterInventory('sold')">Sold</button>
+          <input type="text" placeholder="Search VIN, make, model..." style="width:220px;margin-left:auto" oninput="searchInventory(this.value)" />
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Stock #</th><th>Vehicle</th><th>VIN</th><th>Miles</th>
+                  <th>Cost</th><th>Price</th><th>Days</th><th>Status</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="inventory-tbody">
+                <!-- Rows injected by renderInventory() -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           DEAL DESK
+      ══════════════════════════════════ -->
+      <div id="page-deals" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Deal desk</h2>
+          <div class="filter-row" style="margin:0">
+            <button class="filter-pill deal-type-btn active" data-type="finance" onclick="setDealType('finance')">Finance</button>
+            <button class="filter-pill deal-type-btn" data-type="cash" onclick="setDealType('cash')">Cash</button>
+            <button class="filter-pill deal-type-btn" data-type="bhph" onclick="setDealType('bhph')">BHPH</button>
+            <button class="filter-pill deal-type-btn" data-type="lease" onclick="setDealType('lease')">Lease</button>
+          </div>
+        </div>
+        <input type="hidden" id="d-type" value="finance" />
+
+        <div class="grid-2">
+          <div>
+            <div class="card mb-16">
+              <div class="card-title">Vehicle &amp; customer</div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="field-label">Stock #</label>
+                  <input type="text" id="d-stock" value="GA-2241" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">VIN</label>
+                  <input type="text" id="d-vin" value="1FTFW1E82MFA12345" class="mono" />
+                </div>
+                <div class="form-group full">
+                  <label class="field-label">Vehicle</label>
+                  <input type="text" id="d-vehicle" value="2021 Ford F-150 XLT 4WD — 44,200 mi" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Customer name</label>
+                  <input type="text" id="d-customer" value="Marcus Thompson" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Phone</label>
+                  <input type="tel" id="d-phone" value="(770) 555-0142" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Salesperson</label>
+                  <select id="d-salesperson">
+                    <option>Kevin S.</option><option>Brenda T.</option>
+                    <option>Mike D.</option><option>Lisa R.</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Deal date</label>
+                  <input type="date" id="d-date" value="2026-05-30" />
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Deal structure</div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="field-label">Sale price ($)</label>
+                  <input type="number" id="d-price" value="29900" oninput="calcDeal()" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Vehicle cost ($)</label>
+                  <input type="number" id="d-cost" value="22500" oninput="calcDeal()" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Trade allowance ($)</label>
+                  <input type="number" id="d-trade" value="5000" oninput="calcDeal()" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Down payment ($)</label>
+                  <input type="number" id="d-down" value="2000" oninput="calcDeal()" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Sales tax (7%)</label>
+                  <input type="number" id="d-tax" value="1953" readonly />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">GAP insurance ($)</label>
+                  <input type="number" id="d-gap" value="695" oninput="calcDeal()" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Extended warranty ($)</label>
+                  <input type="number" id="d-warranty" value="1200" oninput="calcDeal()" />
+                </div>
+                <div class="form-group"></div>
+              </div>
+              <div id="finance-fields" class="form-grid mt-12">
+                <div class="form-group">
+                  <label class="field-label">APR (%)</label>
+                  <input type="number" id="d-apr" value="12.99" step="0.01" oninput="calcDeal()" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label">Term (months)</label>
+                  <select id="d-term" onchange="calcDeal()">
+                    <option>24</option><option>36</option>
+                    <option selected>48</option><option>60</option><option>72</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="deal-summary-box">
+              <div class="deal-summary-title">Deal summary</div>
+              <div class="deal-line"><span class="deal-line-label">Sale price</span><span class="deal-line-value" id="s-price">$29,900</span></div>
+              <div class="deal-line"><span class="deal-line-label">− Trade allowance</span><span class="deal-line-value" id="s-trade">−$5,000</span></div>
+              <div class="deal-line"><span class="deal-line-label">− Down payment</span><span class="deal-line-value" id="s-down">−$2,000</span></div>
+              <div class="deal-line"><span class="deal-line-label">+ Sales tax (7%)</span><span class="deal-line-value" id="s-tax">+$1,953</span></div>
+              <div class="deal-line"><span class="deal-line-label">+ GAP insurance</span><span class="deal-line-value" id="s-gap">+$695</span></div>
+              <div class="deal-line"><span class="deal-line-label">+ Extended warranty</span><span class="deal-line-value" id="s-warranty">+$1,200</span></div>
+              <div class="deal-line" style="border-top:1px solid rgba(255,255,255,0.2);margin-top:6px;padding-top:8px">
+                <span class="deal-line-label">Amount financed</span>
+                <span id="s-financed" style="color:#fff;font-weight:600;font-size:15px">$26,748</span>
+              </div>
+              <div class="deal-payment">
+                <span class="deal-payment-label">Monthly payment</span>
+                <div class="flex-center gap-8">
+                  <span class="deal-payment-amount" id="s-payment">$718</span>
+                  <span class="deal-payment-per">/mo</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-16">
+              <div class="card-title">Profit summary</div>
+              <div class="bhph-stat-row"><span>Front-end gross</span><span id="s-front" class="text-success fw-500">$7,400</span></div>
+              <div class="bhph-stat-row"><span>Back-end gross</span><span id="s-back" class="text-success fw-500">$1,895</span></div>
+              <div class="bhph-stat-row" style="font-size:14px;font-weight:600"><span>Total gross</span><span id="s-total" class="text-success fw-600" style="font-size:16px">$9,295</span></div>
+            </div>
+
+            <div style="display:flex;gap:10px">
+              <button class="btn" style="flex:1;justify-content:center">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Print deal jacket
+              </button>
+              <button class="btn primary" style="flex:1;justify-content:center" onclick="navigate('etr')">
+                Submit deal →
+              </button>
+            </div>
+
+            <div class="card mt-16">
+              <div class="card-title">Recent deals</div>
+              <table>
+                <thead><tr><th>Customer</th><th>Vehicle</th><th>Gross</th><th>Status</th></tr></thead>
+                <tbody id="recent-deals-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           CRM / LEADS
+      ══════════════════════════════════ -->
+      <div id="page-crm" class="page">
+        <div class="section-header">
+          <h2 class="section-title">CRM / Lead pipeline</h2>
+          <button class="btn primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add lead
+          </button>
+        </div>
+        <div class="pipeline-board" id="pipeline-board">
+          <!-- Rendered by renderPipeline() -->
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           F&I
+      ══════════════════════════════════ -->
+      <div id="page-fi" class="page">
+        <div class="section-header">
+          <h2 class="section-title">F&amp;I — Finance &amp; Insurance</h2>
+          <button class="btn primary">New credit application</button>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Credit application — Angela Morrison</div>
+            <div class="form-grid">
+              <div class="form-group"><label class="field-label">Full name</label><input type="text" value="Angela Marie Morrison" /></div>
+              <div class="form-group"><label class="field-label">SSN (last 4)</label><input type="text" value="●●●●● 7734" /></div>
+              <div class="form-group"><label class="field-label">Date of birth</label><input type="text" value="03/14/1986" /></div>
+              <div class="form-group"><label class="field-label">Monthly income</label><input type="text" value="$4,200" /></div>
+              <div class="form-group"><label class="field-label">Employer</label><input type="text" value="Walton County Schools" /></div>
+              <div class="form-group"><label class="field-label">Time at job</label><input type="text" value="4 years, 2 months" /></div>
+              <div class="form-group"><label class="field-label">Rent / mortgage / mo</label><input type="text" value="$1,100" /></div>
+              <div class="form-group"><label class="field-label">Time at address</label><input type="text" value="3 years" /></div>
+            </div>
+            <div class="flex gap-8 mt-16">
+              <button class="btn primary">Submit to lenders</button>
+              <button class="btn">OFAC check</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="card mb-16">
+              <div class="card-title">Lender responses</div>
+              <div class="bhph-stat-row"><span class="fw-500">Credit Acceptance Corp.</span><span><span class="badge badge-green">Approved — 18.9% / 60mo</span></span></div>
+              <div class="bhph-stat-row"><span class="fw-500">Westlake Financial</span><span><span class="badge badge-amber">Pending...</span></span></div>
+              <div class="bhph-stat-row"><span class="fw-500">DealerTrack Network</span><span><span class="badge badge-red">Declined</span></span></div>
+              <div class="bhph-stat-row"><span class="fw-500">RouteOne / CUDL</span><span><span class="badge badge-amber">Pending...</span></span></div>
+              <div class="bhph-stat-row"><span class="fw-500">Mid-Atlantic Finance</span><span><span class="badge badge-amber">Pending...</span></span></div>
+            </div>
+            <div class="card">
+              <div class="card-title">Compliance</div>
+              <div class="bhph-stat-row"><span>OFAC check</span><span><span class="badge badge-green">✓ Clear</span></span></div>
+              <div class="bhph-stat-row"><span>Red flags rule</span><span><span class="badge badge-green">✓ Clear</span></span></div>
+              <div class="bhph-stat-row"><span>ID verification</span><span><span class="badge badge-green">✓ Verified</span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">F&amp;I product menu</div>
+          <table>
+            <thead><tr><th>Product</th><th>Provider</th><th>Dealer cost</th><th>Sale price</th><th>Profit</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>GAP insurance</td><td>Safe-Guard</td><td>$195</td><td>$695</td><td class="text-success fw-500">$500</td><td><span class="badge badge-green">Sold</span></td></tr>
+              <tr><td>Extended warranty (48 mo)</td><td>Endurance</td><td>$600</td><td>$1,200</td><td class="text-success fw-500">$600</td><td><span class="badge badge-green">Sold</span></td></tr>
+              <tr><td>Tire &amp; wheel protection</td><td>Safe-Guard</td><td>$150</td><td>$395</td><td class="text-success fw-500">$245</td><td><span class="badge badge-gray">Not sold</span></td></tr>
+              <tr><td>Credit life insurance</td><td>AFAS</td><td>$80</td><td>$250</td><td class="text-success fw-500">$170</td><td><span class="badge badge-gray">Not sold</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           BHPH COLLECTIONS
+      ══════════════════════════════════ -->
+      <div id="page-bhph" class="page">
+        <div class="section-header">
+          <h2 class="section-title">BHPH collections</h2>
+          <button class="btn primary">Record payment</button>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card"><div class="metric-label">Active accounts</div><div class="metric-value">38</div><div class="metric-delta neutral">portfolio active</div></div>
+          <div class="metric-card"><div class="metric-label">Collected this month</div><div class="metric-value">$14,820</div><div class="metric-delta up">+$1,200 vs last month</div></div>
+          <div class="metric-card"><div class="metric-label">Overdue accounts</div><div class="metric-value" style="color:var(--red)">6</div><div class="metric-delta down">2 new this week</div></div>
+          <div class="metric-card"><div class="metric-label">Total portfolio balance</div><div class="metric-value">$284,100</div><div class="metric-delta neutral">38 open contracts</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Account status</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Account</th><th>Customer</th><th>Vehicle</th><th>Payment</th><th>Next due</th><th>Balance</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="bhph-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           GEORGIA ETR
+      ══════════════════════════════════ -->
+      <div id="page-etr" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Georgia ETR — Electronic title &amp; registration</h2>
+          <button class="btn primary">New ETR submission</button>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card"><div class="metric-label">Submitted this month</div><div class="metric-value">21</div></div>
+          <div class="metric-card"><div class="metric-label">Approved</div><div class="metric-value text-success">18</div></div>
+          <div class="metric-card"><div class="metric-label">Pending review</div><div class="metric-value" style="color:var(--gold)">2</div></div>
+          <div class="metric-card"><div class="metric-label">Rejected / action needed</div><div class="metric-value text-danger">1</div></div>
+        </div>
+
+        <div class="filter-row">
+          <button class="filter-pill etr-filter-btn active" data-status="all" onclick="filterETR('all')">All</button>
+          <button class="filter-pill etr-filter-btn" data-status="approved" onclick="filterETR('approved')">Approved</button>
+          <button class="filter-pill etr-filter-btn" data-status="pending" onclick="filterETR('pending')">Pending</button>
+          <button class="filter-pill etr-filter-btn" data-status="rejected" onclick="filterETR('rejected')">Rejected</button>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden">
+          <table>
+            <thead><tr><th>ETR #</th><th>Customer</th><th>Vehicle</th><th>VIN (last 8)</th><th>County</th><th>TAVT paid</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
+            <tbody id="etr-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           REPORTS
+      ══════════════════════════════════ -->
+      <div id="page-reports" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Reports</h2>
+          <button class="btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card"><div class="metric-label">MTD gross profit</div><div class="metric-value">$61,400</div><div class="metric-delta up">+12% vs last month</div></div>
+          <div class="metric-card"><div class="metric-label">Avg front-end gross</div><div class="metric-value">$2,670</div><div class="metric-delta up">+$180 per deal</div></div>
+          <div class="metric-card"><div class="metric-label">Avg back-end gross</div><div class="metric-value">$1,020</div><div class="metric-delta up">+$95 per deal</div></div>
+          <div class="metric-card"><div class="metric-label">Lead conversion rate</div><div class="metric-value">31%</div><div class="metric-delta up">+4pts vs last month</div></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Monthly gross profit <span class="card-subtitle">last 6 months</span></div>
+            <div id="monthly-chart" style="display:flex;align-items:flex-end;gap:6px;height:140px;padding-top:24px"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Sales by rep <span class="card-subtitle">MTD</span></div>
+            <table>
+              <thead><tr><th>Salesperson</th><th>Units</th><th>Front</th><th>Back</th><th>Total</th></tr></thead>
+              <tbody>
+                <tr><td class="fw-500">Kevin S.</td><td>8</td><td>$22,400</td><td>$7,200</td><td class="fw-600 text-success">$29,600</td></tr>
+                <tr><td class="fw-500">Brenda T.</td><td>7</td><td>$18,900</td><td>$6,100</td><td class="fw-600 text-success">$25,000</td></tr>
+                <tr><td class="fw-500">Mike D.</td><td>5</td><td>$11,800</td><td>$4,900</td><td class="fw-600 text-success">$16,700</td></tr>
+                <tr><td class="fw-500">Lisa R.</td><td>3</td><td>$8,100</td><td>$3,200</td><td class="fw-600 text-success">$11,300</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Lead sources <span class="card-subtitle">MTD</span></div>
+            <div class="bhph-stat-row"><span>Website / organic</span><span class="fw-500">14 leads (41%)</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:41%"></div></div>
+            <div class="bhph-stat-row"><span>Facebook / social</span><span class="fw-500">9 leads (26%)</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:26%;background:var(--blue-light)"></div></div>
+            <div class="bhph-stat-row"><span>Walk-in</span><span class="fw-500">7 leads (21%)</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:21%;background:var(--green)"></div></div>
+            <div class="bhph-stat-row"><span>Referral</span><span class="fw-500">4 leads (12%)</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:12%;background:var(--gold)"></div></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Deal type mix <span class="card-subtitle">MTD</span></div>
+            <div class="bhph-stat-row"><span>Finance (bank)</span><span class="fw-500">11 deals — 48%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
+            <div class="bhph-stat-row"><span>BHPH (in-house)</span><span class="fw-500">7 deals — 30%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:30%;background:var(--green)"></div></div>
+            <div class="bhph-stat-row"><span>Cash</span><span class="fw-500">5 deals — 22%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:22%;background:var(--gold)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           AI ASSISTANT
+      ══════════════════════════════════ -->
+      <div id="page-ai" class="page">
+        <div class="section-header">
+          <h2 class="section-title">AI assistant</h2>
+          <span style="font-size:12px;color:var(--gray-400)">Powered by Claude (Anthropic)</span>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="ai-panel mb-16">
+              <div class="ai-header">
+                <div class="ai-header-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
+                </div>
+                <div>
+                  <div class="ai-header-text">PLACEHOLDER AI</div>
+                  <div class="ai-header-sub">Ask anything about your dealership</div>
+                </div>
+              </div>
+              <div class="ai-messages" id="ai-messages">
+                <div class="ai-msg assistant">Hi! I'm your PLACEHOLDER AI assistant, powered by Claude. I can help you structure deals, analyze inventory aging, score leads, run reports in plain English, check on BHPH accounts, and much more. What do you need?</div>
+              </div>
+              <div class="ai-input-row">
+                <input class="ai-input" id="ai-input" type="text" placeholder="Ask anything about your dealership..." />
+                <button class="ai-send-btn" onclick="aiSend()" aria-label="Send message">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  Send
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Quick prompts</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <button class="filter-pill" onclick="aiQuickPrompt('Which vehicles have been on the lot over 60 days?')">Aged inventory</button>
+                <button class="filter-pill" onclick="aiQuickPrompt('Structure a deal for a $25,000 vehicle with $2,000 down at 14% for 48 months')">Deal calculator</button>
+                <button class="filter-pill" onclick="aiQuickPrompt('Which leads need follow-up today?')">Follow-up needed</button>
+                <button class="filter-pill" onclick="aiQuickPrompt('What was my best grossing deal this month?')">Best deal</button>
+                <button class="filter-pill" onclick="aiQuickPrompt('How many BHPH accounts are overdue?')">BHPH overdue</button>
+                <button class="filter-pill" onclick="aiQuickPrompt('What is my lead conversion rate this month and how can I improve it?')">Conversion rate</button>
+                <button class="filter-pill" onclick="aiQuickPrompt('Which vehicles should I reprice based on market conditions?')">Pricing analysis</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">AI insights — updated daily</div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--amber-light)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg></div>
+                <div class="activity-body"><div class="activity-text">3 units over 60 days old. Estimated floor plan cost: $580/month. Recommend price reductions to accelerate turn.</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                <div class="activity-body"><div class="activity-text">F&I penetration at 68% — above 60% industry average. Kevin S. leads team at 87% penetration rate.</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--blue-pale)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div class="activity-body"><div class="activity-text">7 leads uncontacted for 48+ hours. Recommend SMS follow-up sequence to re-engage before they go cold.</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--red-light)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg></div>
+                <div class="activity-body"><div class="activity-text">Maria G. (BHPH) is 22 days past due — approaching 30-day repo threshold. Manual outreach recommended today.</div></div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background:var(--green-light)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                <div class="activity-body"><div class="activity-text">2021 F-150 (GA-2241) is underpriced vs market by ~$2,100. Consider raising ask price before next price drop.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           SETTINGS
+      ══════════════════════════════════ -->
+      <div id="page-settings" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Settings</h2>
+          <button class="btn primary">Save all changes</button>
+        </div>
+        <div class="grid-2">
+          <div class="card mb-16">
+            <div class="card-title">Dealership profile</div>
+            <div class="form-grid">
+              <div class="form-group full"><label class="field-label">Dealership name</label><input type="text" value="GA Auto Dealers LLC" /></div>
+              <div class="form-group full"><label class="field-label">Dealer license #</label><input type="text" value="GA-DLR-20241134" /></div>
+              <div class="form-group"><label class="field-label">Phone</label><input type="tel" value="(770) 555-0100" /></div>
+              <div class="form-group"><label class="field-label">Email</label><input type="email" value="admin@gaautodealer.com" /></div>
+              <div class="form-group full"><label class="field-label">Address</label><input type="text" value="1234 Highway 78, Monroe, GA 30655" /></div>
+              <div class="form-group"><label class="field-label">County</label><input type="text" value="Walton" /></div>
+              <div class="form-group"><label class="field-label">Default sales tax</label><input type="text" value="7.0%" /></div>
+            </div>
+          </div>
+          <div class="card mb-16">
+            <div class="card-title">Integrations</div>
+            <div class="bhph-stat-row"><span class="fw-500">Georgia ETR (CVR)</span><span><span class="badge badge-green">Connected</span></span></div>
+            <div class="bhph-stat-row"><span class="fw-500">DealerTrack</span><span><span class="badge badge-amber">Setup required</span></span></div>
+            <div class="bhph-stat-row"><span class="fw-500">RouteOne</span><span><span class="badge badge-amber">Setup required</span></span></div>
+            <div class="bhph-stat-row"><span class="fw-500">QuickBooks Online</span><span><span class="badge badge-green">Connected</span></span></div>
+            <div class="bhph-stat-row"><span class="fw-500">Facebook Marketplace</span><span><span class="badge badge-green">Connected</span></span></div>
+            <div class="bhph-stat-row"><span class="fw-500">Cars.com</span><span><span class="badge badge-gray">Not connected</span></span></div>
+            <div class="bhph-stat-row"><span class="fw-500">Twilio SMS</span><span><span class="badge badge-green">Connected</span></span></div>
+            <div class="bhph-stat-row"><span class="fw-500">Claude AI API</span><span><span class="badge badge-green">Connected</span></span></div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Notifications</div>
+            <div class="toggle-row">
+              <div><div class="toggle-label">New lead alert</div><div class="toggle-sub">Push notification when new lead comes in</div></div>
+              <label class="toggle-switch"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div><div class="toggle-label">BHPH payment overdue</div><div class="toggle-sub">Alert when account goes past due</div></div>
+              <label class="toggle-switch"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div><div class="toggle-label">ETR rejection alert</div><div class="toggle-sub">Alert on any rejected ETR submission</div></div>
+              <label class="toggle-switch"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div><div class="toggle-label">Daily AI summary</div><div class="toggle-sub">Morning email with AI dealership insights</div></div>
+              <label class="toggle-switch"><input type="checkbox" /><span class="toggle-track"></span></label>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">User accounts</div>
+            <table>
+              <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="fw-500">John Dealer</td><td>General Manager</td><td><span class="badge badge-green">Active</span></td></tr>
+                <tr><td class="fw-500">Kevin S.</td><td>Sales</td><td><span class="badge badge-green">Active</span></td></tr>
+                <tr><td class="fw-500">Brenda T.</td><td>Sales</td><td><span class="badge badge-green">Active</span></td></tr>
+                <tr><td class="fw-500">Mike D.</td><td>Sales</td><td><span class="badge badge-green">Active</span></td></tr>
+                <tr><td class="fw-500">Lisa R.</td><td>Sales / F&I</td><td><span class="badge badge-green">Active</span></td></tr>
+              </tbody>
+            </table>
+            <button class="btn btn-sm mt-12">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add user
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Add Vehicle Modal -->
+<div id="add-vehicle-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center">
+  <div class="card" style="width:520px;max-width:90vw;max-height:90vh;overflow-y:auto">
+    <div class="card-title">
+      Add vehicle
+      <button class="btn btn-sm" onclick="document.getElementById('add-vehicle-modal').style.display='none'">✕ Close</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="field-label">VIN</label>
+        <div class="flex gap-8">
+          <input type="text" id="new-vin" placeholder="Enter 17-character VIN..." maxlength="17" style="flex:1;font-family:var(--mono)" />
+          <button class="btn primary btn-sm" onclick="decodeVIN()">Decode VIN</button>
+        </div>
+      </div>
+      <div class="form-group"><label class="field-label">Year</label><input type="text" id="new-year" placeholder="2021" /></div>
+      <div class="form-group"><label class="field-label">Make</label><input type="text" id="new-make" placeholder="Ford" /></div>
+      <div class="form-group full"><label class="field-label">Model</label><input type="text" id="new-model" placeholder="F-150 XLT 4WD" /></div>
+      <div class="form-group"><label class="field-label">Trim</label><input type="text" id="new-trim" /></div>
+      <div class="form-group"><label class="field-label">Engine</label><input type="text" id="new-engine" /></div>
+      <div class="form-group"><label class="field-label">Mileage</label><input type="number" id="new-miles" placeholder="44200" /></div>
+      <div class="form-group"><label class="field-label">Color</label><input type="text" id="new-color" placeholder="Oxford White" /></div>
+      <div class="form-group"><label class="field-label">Purchase cost ($)</label><input type="number" id="new-cost" placeholder="22500" /></div>
+      <div class="form-group"><label class="field-label">Asking price ($)</label><input type="number" id="new-price" placeholder="29900" /></div>
+      <div class="form-group"><label class="field-label">Status</label>
+        <select id="new-status"><option value="recon">In recon</option><option value="frontline">Frontline</option></select>
+      </div>
+      <div class="form-group"><label class="field-label">Stock #</label><input type="text" id="new-stock" placeholder="GA-2242" /></div>
+    </div>
+    <div class="flex gap-8 mt-16">
+      <button class="btn primary" onclick="document.getElementById('add-vehicle-modal').style.display='none'">Add to inventory</button>
+      <button class="btn" onclick="document.getElementById('add-vehicle-modal').style.display='none'">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app-data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // ── Render inventory table ──
+  function renderInventory() {
+    const tbody = document.getElementById('inventory-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = InventoryData.map(v => {
+      const statusMap = { frontline:'badge-green', recon:'badge-amber', sold:'badge-gray' };
+      const statusLabel = { frontline:'Frontline', recon:'In recon', sold:'Sold' };
+      const daysClass = v.days > 60 ? 'text-danger fw-500' : v.days > 30 ? 'text-warning' : '';
+      return `<tr class="inv-row" data-status="${v.status}">
+        <td class="mono fw-500">${v.stock}</td>
+        <td>${v.year} ${v.make} ${v.model}</td>
+        <td class="mono text-muted" style="font-size:11px">${v.vin}</td>
+        <td>${v.miles.toLocaleString()}</td>
+        <td>$${v.cost.toLocaleString()}</td>
+        <td class="fw-500">$${v.price.toLocaleString()}</td>
+        <td class="${daysClass}">${v.days}</td>
+        <td><span class="badge ${statusMap[v.status] || 'badge-gray'}">${statusLabel[v.status] || v.status}</span></td>
+        <td><button class="btn btn-sm" onclick="navigate('deals')">Deal</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── Render pipeline ──
+  function renderPipeline() {
+    const stages = [
+      { id:'new',       label:'New leads',    count: LeadsData.filter(l=>l.stage==='new').length },
+      { id:'contacted', label:'Contacted',    count: LeadsData.filter(l=>l.stage==='contacted').length },
+      { id:'showroom',  label:'In showroom',  count: LeadsData.filter(l=>l.stage==='showroom').length },
+      { id:'fi',        label:'F&I / Pending',count: LeadsData.filter(l=>l.stage==='fi').length },
+      { id:'sold',      label:'Sold / Won',   count: LeadsData.filter(l=>l.stage==='sold').length },
+    ];
+    const board = document.getElementById('pipeline-board');
+    if (!board) return;
+    board.innerHTML = stages.map(stage => {
+      const leads = LeadsData.filter(l => l.stage === stage.id);
+      const cards = leads.map(l => {
+        const scoreClass = l.score >= 85 ? 'badge-green' : l.score >= 70 ? 'badge-amber' : 'badge-gray';
+        const srcClass = l.source === 'Website' ? 'badge-blue' : l.source === 'Referral' ? 'badge-green' : 'badge-gray';
+        return `<div class="pipeline-card" data-stage="${stage.id}">
+          <div class="pipeline-card-name">${l.name}</div>
+          <div class="pipeline-card-vehicle">${l.interest}</div>
+          <div class="pipeline-card-meta">
+            <span class="badge ${srcClass}">${l.source}</span>
+            <span class="pipeline-card-time">${l.time}</span>
+          </div>
+          <div style="margin-top:6px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:10px;color:var(--gray-400)">Score</span>
+            <span class="badge ${scoreClass}" style="font-size:10px">${l.score}</span>
+          </div>
+        </div>`;
+      }).join('');
+      const colClass = stage.id === 'sold' ? 'badge-green' : stage.id === 'showroom' ? 'badge-amber' : 'badge-gray';
+      return `<div class="pipeline-col">
+        <div class="pipeline-col-header">
+          <span class="pipeline-col-name">${stage.label}</span>
+          <span class="badge ${colClass}">${stage.count}</span>
+        </div>
+        ${cards}
+      </div>`;
+    }).join('');
+  }
+
+  // ── Render BHPH table ──
+  function renderBHPH() {
+    const tbody = document.getElementById('bhph-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = BHPHData.map(a => {
+      const statusMap = { current:'badge-green', late:'badge-red', due:'badge-amber' };
+      const statusLabel = {
+        current: 'Current',
+        late: `${a.daysLate} days late`,
+        due: 'Due soon'
+      };
+      const dueCls = a.status === 'late' ? 'text-danger fw-500' : '';
+      return `<tr>
+        <td class="mono text-muted" style="font-size:11px">${a.id}</td>
+        <td class="fw-500">${a.customer}</td>
+        <td>${a.vehicle}</td>
+        <td>$${a.payment}/${a.freq === 'weekly' ? 'wk' : a.freq === 'bi-weekly' ? '2wk' : 'mo'}</td>
+        <td class="${dueCls}">${a.nextDue}</td>
+        <td>$${a.balance.toLocaleString()}</td>
+        <td><span class="badge ${statusMap[a.status]}">${statusLabel[a.status]}</span></td>
+        <td><button class="btn btn-sm" style="${a.status==='late'?'color:var(--red);border-color:var(--red-light)':''}">${a.status === 'late' ? 'Call now' : 'Post payment'}</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── Render ETR table ──
+  function renderETR() {
+    const tbody = document.getElementById('etr-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = ETRData.map(e => {
+      const statusMap = { approved:'badge-green', pending:'badge-amber', rejected:'badge-red' };
+      const statusLabel = { approved:'Approved', pending:'Pending review', rejected:'Rejected — action needed' };
+      const vinShort = e.vin.slice(-8);
+      return `<tr class="etr-row" data-status="${e.status}">
+        <td class="mono text-muted" style="font-size:11px">${e.id}</td>
+        <td class="fw-500">${e.customer}</td>
+        <td>${e.vehicle}</td>
+        <td class="mono text-muted" style="font-size:11px">...${vinShort}</td>
+        <td>${e.county} Co.</td>
+        <td>$${e.tavt.toLocaleString()}</td>
+        <td class="text-muted" style="font-size:12px">${e.submitted}</td>
+        <td><span class="badge ${statusMap[e.status]}">${statusLabel[e.status]}</span></td>
+        <td>${e.status === 'rejected' ? '<button class="btn btn-sm btn-danger">Fix &amp; resubmit</button>' : ''}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── Render recent deals on deal desk ──
+  function renderRecentDeals() {
+    const tbody = document.getElementById('recent-deals-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = DealsData.slice(0, 5).map(d => {
+      const total = d.frontGross + d.backGross;
+      const statusMap = { funded:'badge-green', pending:'badge-amber', etrsent:'badge-blue' };
+      return `<tr>
+        <td class="fw-500">${d.customer.split(' ')[0]} ${d.customer.split(' ')[1][0]}.</td>
+        <td style="font-size:12px">${d.vehicle.replace(/^20\d\d /,'').substring(0,20)}</td>
+        <td class="text-success fw-500">$${total.toLocaleString()}</td>
+        <td><span class="badge ${statusMap[d.status] || 'badge-gray'}">${d.status.charAt(0).toUpperCase()+d.status.slice(1)}</span></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // Init all renders
+  document.addEventListener('DOMContentLoaded', () => {
+    renderInventory();
+    renderPipeline();
+    renderBHPH();
+    renderETR();
+    renderRecentDeals();
+    calcDeal();
+    renderReportBars();
+
+    // Keyboard nav for sidebar items
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
